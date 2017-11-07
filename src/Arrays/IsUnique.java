@@ -1,4 +1,4 @@
-// Program to check if the given set of words has unique characters in each word.
+// Java Program to check if the given set of words has unique characters in each word.
 package Arrays;
 
 public class IsUnique {
