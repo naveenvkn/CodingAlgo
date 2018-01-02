@@ -1,10 +1,59 @@
 package Misc;
 
+import java.util.HashMap;
+
 public class LRUCache {
+	private int cacheSize;
+	private DoublyLinkedList plist;
+	private HashMap<Integer, Node> pmap;
+	
+	public LRUCache(int size)
+	{
+		this.cacheSize=size;
+		plist=new DoublyLinkedList(size);
+		pmap=new HashMap<Integer, Node>();
+	}
+	public void accessPage(int pg)
+	{
+		Node pageNode=null;
+		if(pmap.containsKey(pg))
+		{
+			pageNode=pmap.get(pg);
+			plist.movepagetohead(pageNode);
+		}
+		else
+		{
+			if(plist.currentsize == cacheSize)
+			{
+				pmap.remove(plist.tail.pageNumber);
+			}
+			pageNode=plist.addpagetolist(pg);
+			pmap.put(pg, pageNode);
+		}
+	}
+	public void printList()
+	{
+		System.out.println();
+		plist.printlist();
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		LRUCache lru=new LRUCache(4);
+		lru.accessPage(1);
+		lru.printList();
+		lru.accessPage(2);
+		lru.printList();
+		lru.accessPage(3);
+		lru.printList();
+		lru.accessPage(4);
+		lru.printList();
+		lru.accessPage(9);
+		lru.printList();
+		lru.accessPage(2);
+		lru.printList();
+		lru.accessPage(4);
+		lru.printList();
 	}
 
 }
