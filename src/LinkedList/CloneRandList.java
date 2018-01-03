@@ -21,7 +21,17 @@ class CloneRandList {
 			cur.next.random=cur.random.next;
 			cur=cur.next.next;
 		}
-		
+		Noden orig=start;
+		Noden copy=start.next;
+		Noden res=copy;
+		while(orig!=null && copy!=null)
+		{
+			orig.next=(orig.next!=null?orig.next.next:orig.next);
+			copy.next=(copy.next!=null?copy.next.next:copy.next);
+			orig=orig.next;
+			copy=copy.next;
+		}
+		return res;
 	}
 	public static void printList(Noden n)
 	{
